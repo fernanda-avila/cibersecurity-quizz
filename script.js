@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+   
     const explanationContainer = document.getElementById('explanation');
     const quizContainer = document.getElementById('quiz');
     const questionElement = document.getElementById('question');
@@ -11,11 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const restartButton = document.getElementById('restart-btn');
     const timerElement = document.getElementById('timer');
     const startButton = document.getElementById('start-btn');
+    const hintBtn = document.getElementById('hint-btn');
+    const hintBox = document.getElementById('hint-box');
+
     
     let currentQuestionIndex = 0;
     let score = 0;
     let timer;
     let timeLeft = 30;
+    let currentHint = "";
+    let isTyping = false;
+
     
     const questions = [
         {
@@ -27,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "A proteção de dispositivos móveis exclusivamente"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! Cibersegurança é o conjunto de práticas para proteger sistemas contra ameaças digitais."
+            explanation: "[✓] Correto! Cibersegurança é o conjunto de práticas para proteger sistemas contra ameaças digitais.",
+            hint: "*Digitando rápido* Se eu fosse um sysadmin, me preocuparia com a proteção completa... não apenas antivírus ou celulares, mas toda a infraestrutura digital."
         },
         {
             question: "Quais são os principais pilares da cibersegurança?",
@@ -38,7 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Proteção, redes e dispositivos"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! Os três pilares são Confidencialidade, Integridade e Disponibilidade (CID)."
+            explanation: "[✓] Correto! Os três pilares são Confidencialidade, Integridade e Disponibilidade (CID).",
+            hint: "*Rindo* Eu odeio quando aplicam esses três princípios direito... Um deles me impede de ler dados, outro de alterá-los... e tem aquele que mantém tudo funcionando."
         },
         {
             question: "Como a cibersegurança pode ajudar uma empresa?",
@@ -49,18 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Ajudar a desenvolver novos softwares"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! A cibersegurança protege a empresa contra ameaças digitais e vazamentos."
+            explanation: "[✓] Correto! A cibersegurança protege a empresa contra ameaças digitais e vazamentos.",
+            hint: "*Analisando redes* Se uma empresa não quer me ver roubando seus dados ou derrubando seus sistemas... o que ela deveria implementar?"
         },
         {
             question: "O que é phishing?",
             options: [
-                "Um ataque que se disfarça de e-mail ou mensagem para roubar dados pessoais",
+                "Um ataque que se disguisa de e-mail ou mensagem para roubar dados pessoais",
                 "Um tipo de antivírus",
                 "Uma técnica para melhorar a segurança dos dados",
                 "Um sistema de firewall"
             ],
             correctAnswer: 0,
-            explanation: "[✓] Correto! Phishing é um golpe que tenta enganar vítimas para obter informações sensíveis."
+            explanation: "[✓] Correto! Phishing é um golpe que tenta enganar vítimas para obter informações sensíveis.",
+            hint: "*Sussurrando* Eu adoro enviar e-mails que parecem do banco... mas não são. Qual será o nome dessa técnica que 'pesca' dados?"
         },
         {
             question: "Qual é o objetivo de um ataque de ransomware?",
@@ -71,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Infectar computadores com vírus leves"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! Ransomware criptografa dados e exige pagamento para liberá-los."
+            explanation: "[✓] Correto! Ransomware criptografa dados e exige pagamento para liberá-los.",
+            hint: "*Criptografando arquivos* Imagine que todos seus documentos viraram um enigma... e eu peço Bitcoin para te dar a senha. Isso me lembra a palavra 'ransom'..."
         },
         {
             question: "O que significa 'confidencialidade' na cibersegurança?",
@@ -82,7 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Proteger os sistemas de vírus"
             ],
             correctAnswer: 2,
-            explanation: "[✓] Correto! Confidencialidade garante que só pessoas autorizadas acessem informações."
+            explanation: "[✓] Correto! Confidencialidade garante que só pessoas autorizadas acessem informações.",
+            hint: "*Farejando dados* Se eu não consigo acessar informações mesmo com minhas técnicas... qual princípio está sendo bem aplicado?"
         },
         {
             question: "Qual é o papel dos antivírus na cibersegurança?",
@@ -93,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Armazenar dados pessoais de forma segura"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! Antivírus detectam, impedem e removem software malicioso."
+            explanation: "[✓] Correto! Antivírus detectam, impedem e removem software malicioso.",
+            hint: "*Desenvolvendo malware* Esses programas irritantes sempre detectam meus códigos maliciosos... o que eles fazem exatamente?"
         },
         {
             question: "Qual frase está no imperativo negativo correto para segurança?",
@@ -104,7 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "No open suspicious email attachments"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! O imperativo negativo usa 'Don't' + verbo base."
+            explanation: "[✓] Correto! O imperativo negativo usa 'Don't' + verbo base.",
+            hint: "*Digitando comandos* Para dar ordens negativas em inglês, usamos 'Don't' + qual forma do verbo?"
         },
         {
             question: "Complete com 'to be': 'Cybersecurity _____ essential for all organizations.'",
@@ -115,7 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 "be"
             ],
             correctAnswer: 1,
-            explanation: "[✓] Correto! 'Cybersecurity' é singular, usamos 'is'."
+            explanation: "[✓] Correto! 'Cybersecurity' é singular, usamos 'is'.",
+            hint: "*Analisando gramática* 'Cybersecurity' é singular ou plural? Qual forma do verbo 'to be' usamos para singular no presente?"
         },
         {
             question: "Qual NÃO é uma boa prática de segurança?",
@@ -126,15 +142,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 "Atualizar software regularmente"
             ],
             correctAnswer: 1,
-            explanation: "[✗] Correto! Compartilhar senhas é uma péssima prática de segurança."
+            explanation: "[✗] Correto! Compartilhar senhas é uma péssima prática de segurança.",
+            hint: "*Rindo* Se eu visse alguém fazendo isso, eu agradeceria! Qual dessas práticas seria um presente para um hacker?"
         }
     ];
-    
+
+   
     function initQuiz() {
         explanationContainer.style.display = 'block';
         quizContainer.style.display = 'none';
         resultContainer.style.display = 'none';
+        hintBox.style.display = 'none';
     }
+
     
     function startQuiz() {
         currentQuestionIndex = 0;
@@ -143,20 +163,26 @@ document.addEventListener('DOMContentLoaded', () => {
         explanationContainer.style.display = 'none';
         quizContainer.style.display = 'block';
         resultContainer.style.display = 'none';
+        hintBox.style.display = 'none';
         showQuestion();
         startTimer();
     }
-    
+
+ 
     function showQuestion() {
         resetState();
         const currentQuestion = questions[currentQuestionIndex];
         const questionNo = currentQuestionIndex + 1;
         const totalQuestions = questions.length;
         
+    
         const progressPercent = (questionNo / totalQuestions) * 100;
         progressBar.style.width = `${progressPercent}%`;
         
+       
         questionElement.textContent = `${questionNo}. ${currentQuestion.question}`;
+        currentHint = currentQuestion.hint;
+        
         
         currentQuestion.options.forEach((option, index) => {
             const optionElement = document.createElement('div');
@@ -166,18 +192,23 @@ document.addEventListener('DOMContentLoaded', () => {
             optionsElement.appendChild(optionElement);
         });
         
+       
         clearInterval(timer);
         timeLeft = 30;
         updateTimerDisplay();
         startTimer();
     }
+
     
     function resetState() {
         nextButton.style.display = 'none';
+        hintBox.style.display = 'none';
+        isTyping = false;
         while (optionsElement.firstChild) {
             optionsElement.removeChild(optionsElement.firstChild);
         }
     }
+
     
     function selectOption(selectedIndex) {
         const currentQuestion = questions[currentQuestionIndex];
@@ -186,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         clearInterval(timer);
         
+       
         options.forEach((option, index) => {
             if (index === correctIndex) {
                 option.classList.add('correct');
@@ -195,11 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
             option.style.pointerEvents = 'none';
         });
         
+    
         if (selectedIndex === correctIndex) {
             score++;
             scoreElement.textContent = `PONTUAÇÃO: ${score}`;
         }
-        
+      
         if (currentQuestion.explanation) {
             const correctOption = options[correctIndex];
             correctOption.setAttribute('title', currentQuestion.explanation);
@@ -208,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         nextButton.style.display = 'block';
     }
+
     
     function showNextQuestion() {
         currentQuestionIndex++;
@@ -217,13 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
             showResult();
         }
     }
-    
+
     function showResult() {
         quizContainer.style.display = 'none';
         resultContainer.style.display = 'block';
         finalScoreElement.textContent = `PONTUAÇÃO FINAL: ${score} de ${questions.length}`;
     }
-    
+
+   
     function startTimer() {
         resetTimer();
         updateTimerDisplay();
@@ -237,13 +272,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1000);
     }
-    
+
     function resetTimer() {
         clearInterval(timer);
-        timeLeft = 30;
+        timeLeft = 60;
         updateTimerDisplay();
     }
-    
+
     function updateTimerDisplay() {
         timerElement.textContent = `TEMPO: ${timeLeft}s`;
         
@@ -258,7 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timerElement.style.textShadow = '0 0 5px var(--neon-purple)';
         }
     }
-    
+
     function timeUp() {
         const options = document.querySelectorAll('.option');
         options.forEach(option => {
@@ -280,10 +315,44 @@ document.addEventListener('DOMContentLoaded', () => {
         
         nextButton.style.display = 'block';
     }
+
     
+    function showHint() {
+        if (isTyping) return;
+        
+        isTyping = true;
+        let i = 0;
+        const speed = 60;
+        
+        hintBox.innerHTML = `<div class="hacker-terminal">
+            <div class="hacker-header">root@darknet:~$ ./dica.sh</div>
+            <div class="hacker-text" id="typing-text"></div>
+            <div class="blinking-cursor">_</div>
+        </div>`;
+        hintBox.style.display = 'block';
+        
+        const typingText = document.getElementById('typing-text');
+        const text = currentHint;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                typingText.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                isTyping = false;
+            }
+        }
+        
+        typeWriter();
+    }
+
+   
     nextButton.addEventListener('click', showNextQuestion);
     restartButton.addEventListener('click', startQuiz);
     startButton.addEventListener('click', startQuiz);
+    hintBtn.addEventListener('click', showHint);
     
+   
     initQuiz();
 });
