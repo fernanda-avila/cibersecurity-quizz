@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec Quizz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanline"></div>
+    
+    <div class="container">
+        <h1>CYBERSECURITY QUIZ</h1> 
+        
+        <div class="explanation-container content-box" id="explanation">
+            <h2>What is Cybersecurity?</h2>
+            
+            <div class="info-section">
+                <p class="info-text terminal-line">Cybersecurity is the practice of protecting systems, networks, and programs from digital attacks. These attacks typically aim to access, alter, or destroy sensitive information, extort money from users, or disrupt normal business operations.</p>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-title">Pillars of Cybersecurity:</div>
+                <ul class="benefits-list">
+                    <li>Confidentiality – protecting data from unauthorized access</li>
+                    <li>Integrity – ensuring data is not improperly altered</li>
+                    <li>Availability – keeping systems and data accessible when needed</li>
+                    <li>Authenticity – verifying the identity of users and systems</li>
+                </ul>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-title">Main Threats:</div>
+                <ul class="drawbacks-list">
+                    <li>Malware (viruses, worms, trojans, ransomware)</li>
+                    <li>Phishing and social engineering</li>
+                    <li>DDoS attacks (denial of service)</li>
+                    <li>Exploiting vulnerabilities</li>
+                    <li>Insider threats</li>
+                </ul>
+            </div>
+            
+            <div class="info-section">
+                <div class="info-title">Best Practices:</div>
+                <p class="info-text terminal-line"> > Use senhas fortes e autenticação multifator<br>
+                > Mantenha sistemas e softwares atualizados<br>
+                > Eduque usuários sobre phishing<br>
+                > Faça backups regulares<br>
+                > Implemente princípios de privilégio mínimo</p>
+            </div>
+            
+            <div class="grammar-section">
+                <div class="info-title">Explicação Gramatical</div>
+                <h3>Simple Past (Passado Simples)</h3>
+<p class="info-text terminal-line">Usado para ações concluídas no passado em segurança cibernética.</p>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma afirmativa:</strong><br>
+    <span class="terminal-line">"The system <em>was updated</em> yesterday."</span><br>
+    <span class="terminal-line">"They <em>patched</em> the vulnerability last night."</span>
+</div>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma negativa:</strong><br>
+    <span class="terminal-line">"The firewall <em>was not</em> configured correctly."</span><br>
+    <span class="terminal-line">"She <em>did not report</em> the phishing email."</span>
+</div>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma interrogativa:</strong><br>
+    <span class="terminal-line">"<em>Did</em> the team <em>respond</em> to the incident on time?"</span><br>
+    <span class="terminal-line">"<em>Was</em> the network <em>monitored</em> overnight?"</span>
+</div>
+
+<h3>Past Continuous (Passado Contínuo)</h3>
+<p class="info-text terminal-line">Usado para descrever ações em andamento no passado.</p>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma afirmativa:</strong><br>
+    <span class="terminal-line">"They <em>were scanning</em> the system for malware."</span><br>
+    <span class="terminal-line">"The attacker <em>was trying</em> to bypass the firewall."</span>
+</div>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma negativa:</strong><br>
+    <span class="terminal-line">"We <em>weren’t monitoring</em> traffic at that time."</span><br>
+    <span class="terminal-line">"The user <em>wasn't following</em> security protocols."</span>
+</div>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma interrogativa:</strong><br>
+    <span class="terminal-line">"<em>Was</em> the team <em>investigating</em> the breach?"</span><br>
+    <span class="terminal-line">"<em>Were</em> hackers <em>attacking</em> the server overnight?"</span>
+</div>
+
+<h3>Present Perfect (Presente Perfeito)</h3>
+<p class="info-text terminal-line">Usado para ações que começaram no passado e continuam ou têm impacto no presente.</p>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma afirmativa:</strong><br>
+    <span class="terminal-line">"The team <em>has improved</em> the password policy."</span><br>
+    <span class="terminal-line">"We <em>have detected</em> unusual activity."</span>
+</div>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma negativa:</strong><br>
+    <span class="terminal-line">"They <em>haven’t updated</em> the antivirus definitions."</span><br>
+    <span class="terminal-line">"He <em>has not configured</em> two-factor authentication."</span>
+</div>
+
+<div class="verb-example">
+    <strong class="terminal-line">Forma interrogativa:</strong><br>
+    <span class="terminal-line">"<em>Have</em> you <em>checked</em> the logs?"</span><br>
+    <span class="terminal-line">"<em>Has</em> the incident <em>been resolved</em>?"</span>
+</div>
+
+            </div>
+            
+            <button class="btn btn-blue" id="start-btn">INICIAR QUIZ</button>
+        </div>
+        
+        <div class="content-box" id="quiz">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            
+            <div class="timer" id="timer">TEMPO: 30s</div>
+            
+            <div class="question" id="question"></div>
+            
+            <div class="options" id="options"></div>
+            
+            <button class="btn" id="next-btn">PRÓXIMA</button>
+            
+            <div class="score-container" id="score">PONTUAÇÃO: 0</div>
+        </div>
+        
+        <div class="result-container content-box" id="result">
+            <h2>ACESSO CONCLUÍDO</h2>
+            <div class="final-score" id="final-score"></div>
+            <button class="btn btn-blue" id="restart-btn">REINICIAR SISTEMA</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
