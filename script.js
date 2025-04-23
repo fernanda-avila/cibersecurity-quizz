@@ -110,16 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
             hint: "*Desenvolvendo malware* Esses programas irritantes sempre detectam meus códigos maliciosos... o que eles fazem exatamente?"
         },
         {
-            "question": "Qual frase está no Past Continuous corretamente?",
-            "options": [
-                "The IT team was investigate a data breach yesterday",
-                "The IT team were investigating a data breach yesterday",
-                "The IT team was investigating a data breach yesterday",
-                "The IT team is investigating a data breach yesterday"
+            question: "Qual frase está no imperativo negativo correto para segurança?",
+            options: [
+                "Not open suspicious email attachments",
+                "Don't open suspicious email attachments",
+                "Doesn't open suspicious email attachments",
+                "No open suspicious email attachments"
             ],
-            "correctAnswer": 2,
-            "explanation": "[✓] Correto! O Past Continuous usa 'was/were' + verbo com -ing. 'IT team' é singular (was), e 'investigating' mantém a forma contínua.",
-            "hint": "*Lembre-se*: Past Continuous = 'was/were' + verbo terminado em -ing. Time singular usa 'was'!"
+            correctAnswer: 1,
+            explanation: "[✓] Correto! O imperativo negativo usa 'Don't' + verbo base.",
+            hint: "*Digitando comandos* Para dar ordens negativas em inglês, usamos 'Don't' + qual forma do verbo?"
         },
         {
             question:"Complete com 'to be' no passado:'Cybersecurity _____ less complex a decade ago.'",
@@ -131,19 +131,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ],
             correctAnswer: 2,
             explanation: "[✓] Correto! No passado, usamos 'was' para singular. Exemplo: 'Cybersecurity was simpler before cloud computing.'",
-            hint: "*Analisando gramática* \"Regra do passado: Singular → was (it was, she was) Plural → were (they were)"
+            hint: "*Analisando gramática* 'Cybersecurity' é singular ou plural? Qual forma do verbo 'to be' usamos para singular no presente?"
         },
         {
-            "question": "Qual frase está correta no Present Perfect e indica um risco atual?",
-            "options": [
-                "Attackers have exploited this vulnerability since 2022",
-                "We detected malware last week",
-                "The CEO changed his password an hour ago",
-                "They implemented MFA in January"
+            question: "Qual NÃO é uma boa prática de segurança?",
+            options: [
+                "Usar autenticação multifator",
+                "Compartilhar senhas com colegas",
+                "Fazer backups regulares",
+                "Atualizar software regularmente"
             ],
-            "correctAnswer": 0,
-            "explanation": "[✓] Correto! 'Have exploited' mostra uma exploração contínua da vulnerabilidade até hoje. As outras ações (detected/changed/implemented) estão concluídas no passado.",
-            "hint": "*Dica*: Present Perfect = have/has + verbo no particípio (ex: exploited). Procure a ação que ainda afeta o presente!"
+            correctAnswer: 1,
+            explanation: "[✗] Correto! Compartilhar senhas é uma péssima prática de segurança.",
+            hint: "*Rindo* Se eu visse alguém fazendo isso, eu agradeceria! Qual dessas práticas seria um presente para um hacker?"
         }
     ];
 
