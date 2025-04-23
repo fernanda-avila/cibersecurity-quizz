@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "The CEO changed his password an hour ago",
                 "They implemented MFA in January"
             ],
-            "correctAnswer": 1,
+            "correctAnswer": 0,
             "explanation": "[✓] Correto! 'Have exploited' mostra uma exploração contínua da vulnerabilidade até hoje. As outras ações (detected/changed/implemented) estão concluídas no passado.",
             "hint": "*Dica*: Present Perfect = have/has + verbo no particípio (ex: exploited). Procure a ação que ainda afeta o presente!"
         }
